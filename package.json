@@ -1,0 +1,26 @@
+{
+  "name": "roomify",
+  "version": "1.0.0",
+  "description": "Roomify is a full-stack accommodation booking platform inspired by Airbnb.  \r This project is currently under development and focuses on building core full-stack features step by step.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sahitya1903/roomify.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sahitya1903/roomify/issues"
+  },
+  "homepage": "https://github.com/sahitya1903/roomify#readme",
+  "dependencies": {
+    "ejs": "^4.0.1",
+    "express": "^5.2.1",
+    "mongoose": "^9.1.5"
+  }
+}

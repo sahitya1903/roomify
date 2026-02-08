@@ -27,6 +27,19 @@ app.get('/listings',async (req,res)=>{
     res.render('./listings/index.ejs',{allListings});
 })
 
+//NEW Route
+app.get('/listings/new',(req,res)=>{
+    res.render('./listings/new.ejs')    
+})
+
+//CREATE Route
+app.post('/listings/',async(req,res)=>{
+    const newListing=req.body;
+    await Listing.insertOne(newListing);
+    res.redirect('/listings');
+})
+
+
 //SHOW Route
 app.get('/listings/:id',async(req,res)=>{
     let {id}=req.params;

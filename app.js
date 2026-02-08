@@ -3,6 +3,7 @@ const app=express();
 const mongoose=require('mongoose');
 const mongourl="mongodb://127.0.0.1:27017/roomify";
 const Listing=require('./models/listing.js');
+const path=require('path');
 
 main().then(()=>console.log('Connected to DB'))
 .catch(err=>console.log(err));
@@ -10,10 +11,23 @@ async function main() {
     await mongoose.connect(mongourl);
 }
 
+app.set('view engine','ejs');
+app.set('views',path.join(__dirname,'views'))
+
+//Root
 app.get('/',(req,res)=>{
     res.send('root');
 })
 
+
+//INDEX Route
+app.get('/listings',async (req,res)=>{
+    const allListings=await Listing.find({});
+    res.render('./listings/index.ejs',{allListings});
+})
+
+
+/*
 app.get("/testListing",async(req,res)=>{
     let sampleListing=new Listing({
         title:"My New Villa",
@@ -28,6 +42,7 @@ app.get("/testListing",async(req,res)=>{
     res.send("successful testing");
 })
 
+*/
 app.listen(8080,()=>{
     console.log('server listening on port 8080');
 })

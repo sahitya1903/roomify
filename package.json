@@ -20,6 +20,7 @@
   "homepage": "https://github.com/sahitya1903/roomify#readme",
   "dependencies": {
     "ejs": "^4.0.1",
+    "ejs-mate": "^4.0.0",
     "express": "^5.2.1",
     "method-override": "^3.0.0",
     "mongoose": "^9.1.5"

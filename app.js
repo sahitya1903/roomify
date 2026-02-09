@@ -4,7 +4,8 @@ const mongoose=require('mongoose');
 const mongourl="mongodb://127.0.0.1:27017/roomify";
 const Listing=require('./models/listing.js');
 const path=require('path');
-const methodOverride=require('method-override')
+const methodOverride=require('method-override');
+const ejsMate=require('ejs-mate');
 
 main().then(()=>console.log('Connected to DB'))
 .catch(err=>console.log(err));
@@ -16,6 +17,7 @@ app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride('_method'));
+app.engine('ejs',ejsMate);
 
 //Root
 app.get('/',(req,res)=>{

@@ -8,9 +8,10 @@
         <li><%= listing.location %></li>
         <li><%= listing.country %></li>
     </ul>
-    <form action="/listings/<%= listing._id %>/edit" method="get">
+    <a href="/listings/<%= listing._id %>/edit">Edit Listing</a>
+    <!-- <form action="" method="get">
         <button>Edit Listing</button>
-    </form>
+    </form> -->
     <form action="/listings/<%= listing._id %>/?_method=DELETE" method="post">
         <button>Delete Listing</button>
     </form>

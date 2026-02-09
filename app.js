@@ -4,6 +4,7 @@ const mongoose=require('mongoose');
 const mongourl="mongodb://127.0.0.1:27017/roomify";
 const Listing=require('./models/listing.js');
 const path=require('path');
+const methodOverride=require('method-override')
 
 main().then(()=>console.log('Connected to DB'))
 .catch(err=>console.log(err));
@@ -14,6 +15,7 @@ async function main() {
 app.set('view engine','ejs');
 app.set('views',path.join(__dirname,'views'));
 app.use(express.urlencoded({extended:true}));
+app.use(methodOverride('_method'));
 
 //Root
 app.get('/',(req,res)=>{
@@ -45,6 +47,30 @@ app.get('/listings/:id',async(req,res)=>{
     let {id}=req.params;
     const listing=await Listing.findById(id);
     res.render('./listings/show.ejs',{listing});
+})
+
+
+//EDIT Route
+app.get('/listings/:id/edit',async(req,res)=>{
+    const {id}=req.params;
+    const listing=await Listing.findById(id);
+    res.render('./listings/edit.ejs',{listing});
+})
+
+//UPDATE Route
+app.put('/listings/:id',async(req,res)=>{
+    const {id}=req.params;
+    const updatedListing=req.body;
+    await Listing.findByIdAndUpdate(id,updatedListing);
+    // await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    res.redirect('/listings');
+})
+
+//DESTROY Route
+app.delete('/listings/:id',async(req,res)=>{
+    const {id}=req.params;
+    await Listing.findByIdAndDelete(id);
+    res.redirect('/listings');
 })
 
 

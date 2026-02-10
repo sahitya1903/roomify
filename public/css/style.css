@@ -90,3 +90,26 @@ body{
     background-color: #fe424d !important;
     border: none !important;
 }
+
+
+/* Show Page */
+.show-img{
+    height: 30vh;
+}
+
+.btns{
+    display: flex;
+    justify-content: space-between;
+}
+
+.action-btn {
+    width: 110px;         
+    text-align: center;
+}
+
+
+
+.show-card{
+    padding-left: 0;
+    padding-right: 0;
+}

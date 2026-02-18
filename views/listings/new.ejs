@@ -3,10 +3,10 @@
     <div class="row mt-3">
         <div class="col-8 offset-2">
             <h3>Create New Listing</h3>
-            <form method="post" action="/listings/">
+            <form method="post" action="/listings/" novalidate class="needs-validation">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input name="title" id="title" placeholder="Enter title" type="text" class="form-control">
+                    <input name="title" id="title" placeholder="Enter title" type="text" class="form-control" required>
                 </div>
 
                 <div class="mb-3">
@@ -22,18 +22,18 @@
                 <div class="row">
                     <div class="mb-3 col-4">
                         <label for="price" class="form-label">Price</label>
-                        <input name="price" id="price" placeholder="Enter price" type="number" class="form-control">
+                        <input name="price" id="price" placeholder="Enter price" type="number" class="form-control" required>
                     </div>
 
                     <div class="mb-3 col-md-8">
                         <label for="location" class="form-label">Location</label>
-                        <input name="location" id="location" placeholder="Enter location" type="text" class="form-control">
+                        <input name="location" id="location" placeholder="Enter location" type="text" class="form-control" required>
                     </div>
                 </div>
 
                 <div class="mb-3">
                     <label for="country" class="form-label">Country</label>
-                    <input name="country" id="country" placeholder="Enter country" type="text" class="form-control">
+                    <input name="country" id="country" placeholder="Enter country" type="text" class="form-control" required>
                 </div>
 
                 <button class="btn btn-dark add-btn mt-3">Add</button>

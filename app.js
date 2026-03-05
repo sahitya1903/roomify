@@ -6,6 +6,7 @@ const Listing=require('./models/listing.js');
 const path=require('path');
 const methodOverride=require('method-override');
 const ejsMate=require('ejs-mate');
+const wrapAsync=require('./utils/wrapAsync.js');
 
 main().then(()=>console.log('Connected to DB'))
 .catch(err=>console.log(err));
@@ -38,11 +39,11 @@ app.get('/listings/new',(req,res)=>{
 })
 
 //CREATE Route
-app.post('/listings/',async(req,res)=>{
+app.post('/listings/', wrapAsync(async(req,res,next)=>{
     const newListing=req.body;
     await Listing.insertOne(newListing);
     res.redirect('/listings');
-})
+}))
 
 
 //SHOW Route
@@ -93,6 +94,12 @@ app.get("/testListing",async(req,res)=>{
 })
 
 */
+
+//Error Handler
+app.use((err,req,res,next)=>{
+    res.send('Something went wrong');
+})
+
 app.listen(8080,()=>{
     console.log('server listening on port 8080');
 })

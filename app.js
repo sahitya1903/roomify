@@ -43,6 +43,9 @@ app.get('/listings/new',(req,res,next)=>{
 
 //CREATE Route
 app.post('/listings/', wrapAsync(async(req,res,next)=>{
+    if(!req.body.listing){
+        throw new ExpressError(400,"Send valid data for listing");
+    }
     const newListing=req.body;
     await Listing.insertOne(newListing);
     res.redirect('/listings');
@@ -106,7 +109,8 @@ app.use((req,res,next)=>{
 //Error Handler
 app.use((err,req,res,next)=>{
     let {statusCode=500,message='Some error occurred'}= err;
-    res.status(statusCode).send(message);
+    // res.status(statusCode).send(message);
+    res.status(statusCode).render('error.ejs',{ err });
 })
 
 app.listen(8080,()=>{

@@ -78,8 +78,6 @@ app.get('/listings/:id/edit',wrapAsync(async(req,res,next)=>{
 //UPDATE Route
 app.put('/listings/:id',validateListing,wrapAsync(async(req,res,next)=>{
     const {id}=req.params;
-    // const updatedListing=new Listing(req.body.listing);
-    // await Listing.findByIdAndUpdate(id,updatedListing);
     await Listing.findByIdAndUpdate(id,{...req.body.listing});
     res.redirect('/listings');
 }))
@@ -93,7 +91,7 @@ app.delete('/listings/:id',wrapAsync(async(req,res,next)=>{
 
 //ADD Review Route
 app.post("/listings/:id/reviews",wrapAsync(async(req,res)=>{
-    let listing=await Listing.findById(req.params);
+    let listing=await Listing.findById(req.params.id);
     let newReview=new Review(req.body.review);
 
     listing.reviews.push(newReview);
@@ -103,7 +101,7 @@ app.post("/listings/:id/reviews",wrapAsync(async(req,res)=>{
     res.redirect(`/listings/${listing.id}`);
 }))
 
-/*
+//Adding Sample listing
 app.get("/testListing",async(req,res)=>{
     let sampleListing=new Listing({
         title:"My New Villa",
@@ -117,8 +115,6 @@ app.get("/testListing",async(req,res)=>{
     console.log('sample saved');
     res.send("successful testing");
 })
-
-*/
 
 app.use((req,res,next)=>{
     next(new ExpressError(404,'Page not found'));

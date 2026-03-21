@@ -9,7 +9,7 @@ const ejsMate=require('ejs-mate');
 const wrapAsync=require('./utils/wrapAsync.js');
 const ExpressError=require('./utils/ExpressError.js');
 const {listingSchema}=require('./schema.js');
-
+const Review=require('./models/review.js');
 
 main().then(()=>console.log('Connected to DB'))
 .catch(err=>console.log(err));
@@ -53,9 +53,9 @@ app.get('/listings/new',(req,res,next)=>{
 })
 
 //CREATE Route
-app.post('/listings/',validateListing, wrapAsync(async(req,res,next)=>{
-    const newListing=req.body;
-    await Listing.insertOne(newListing);
+app.post('/listings',validateListing, wrapAsync(async(req,res,next)=>{
+    const newListing=new Listing(req.body.listing);
+    await newListing.save();
     res.redirect('/listings');
 }))
 
@@ -78,9 +78,9 @@ app.get('/listings/:id/edit',wrapAsync(async(req,res,next)=>{
 //UPDATE Route
 app.put('/listings/:id',validateListing,wrapAsync(async(req,res,next)=>{
     const {id}=req.params;
-    const updatedListing=req.body;
-    await Listing.findByIdAndUpdate(id,updatedListing);
-    // await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    // const updatedListing=new Listing(req.body.listing);
+    // await Listing.findByIdAndUpdate(id,updatedListing);
+    await Listing.findByIdAndUpdate(id,{...req.body.listing});
     res.redirect('/listings');
 }))
 
@@ -91,6 +91,17 @@ app.delete('/listings/:id',wrapAsync(async(req,res,next)=>{
     res.redirect('/listings');
 }))
 
+//ADD Review Route
+app.post("/listings/:id/reviews",wrapAsync(async(req,res)=>{
+    let listing=await Listing.findById(req.params);
+    let newReview=new Review(req.body.review);
+
+    listing.reviews.push(newReview);
+
+    await newReview.save();
+    await listing.save();
+    res.redirect(`/listings/${listing.id}`);
+}))
 
 /*
 app.get("/testListing",async(req,res)=>{

@@ -5,7 +5,7 @@
             <h3><%= listing.title %></h3>
         </div>
 
-        <div class="card col-6 offset-3 show-card">
+        <div class="card col-6 offset-3 show-card listing-card">
             <img src="<%= listing.image %>" class="card-img-top show-img" alt="listing-image">
             <div class="card-body">
                 <!-- <h5 class="card-title"><b><%= listing.title %></b></h5> -->
@@ -55,6 +55,9 @@
                         <p class="card-text"><%= review.rating %> &starf;</p>
                         <p class="card-text"><%= review.comment %></p>
                     </div>
+                    <form class="mb-3" method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" >
+                        <button class="btn btn-sm btn-dark">Delete</button>
+                    </form>
                 </div>
             <% } %>
             </div>

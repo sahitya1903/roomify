@@ -6,6 +6,8 @@ const path=require('path');
 const methodOverride=require('method-override');
 const ejsMate=require('ejs-mate');
 const ExpressError=require('./utils/ExpressError.js');
+const session=require('express-session');
+
 
 const listings=require('./routes/listing.js');
 const reviews=require('./routes/review.js');
@@ -25,6 +27,13 @@ app.use(methodOverride('_method'));
 app.engine('ejs',ejsMate);
 app.use(express.static(path.join(__dirname,'/public')));
 
+const sessionOptions={
+    secret:'mysupersecret',
+    resave:false,
+    saveUnitialised:true
+}
+
+app.use(session(sessionOptions));
 
 //Root
 app.get('/',(req,res)=>{

@@ -30,7 +30,12 @@ app.use(express.static(path.join(__dirname,'/public')));
 const sessionOptions={
     secret:'mysupersecret',
     resave:false,
-    saveUnitialised:true
+    saveUnitialised:true,
+    cookie:{
+        expires: Date.now()+ 7*24*60*60*1000,  //time in ms
+        maxAge: 7*24*60*60*1000,
+        httpOnly: true
+    }
 }
 
 app.use(session(sessionOptions));

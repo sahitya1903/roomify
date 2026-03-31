@@ -59,14 +59,14 @@ app.use((req,res,next)=>{
     next();
 })
 
-app.get('/getDemoUser',async(req,res)=>{
-    let fakeUser=new User({
-        email:'abc@gmail.com',
-        username:'abc',
-    });
-    let registeredUser=await User.register(fakeUser,'helloWorld');
-    res.send(registeredUser);
-})
+// app.get('/getDemoUser',async(req,res)=>{
+//     let fakeUser=new User({
+//         email:'abc@gmail.com',
+//         username:'abc',
+//     });
+//     let registeredUser=await User.register(fakeUser,'helloWorld');
+//     res.send(registeredUser);
+// })
 
 //Root
 app.get('/',(req,res)=>{

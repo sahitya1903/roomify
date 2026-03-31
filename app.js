@@ -13,8 +13,9 @@ const LocalStrategy=require('passport-local');
 const User=require('./models/user.js');
 
 
-const listings=require('./routes/listing.js');
-const reviews=require('./routes/review.js');
+const listingRouter=require('./routes/listing.js');
+const reviewRouter=require('./routes/review.js');
+const userRouter=require('./routes/user.js')
 
 main()
 .then(()=>console.log('Connected to DB'))
@@ -72,8 +73,10 @@ app.get('/',(req,res)=>{
     res.send('root');
 })
 
-app.use('/listings',listings); //listing routes
-app.use('/listings/:id/reviews',reviews); //review routes
+app.use('/listings',listingRouter); //listing routes
+app.use('/listings/:id/reviews',reviewRouter); //review routes
+app.use('/',userRouter); //user routes
+
 
 app.use((req,res,next)=>{
     next(new ExpressError(404,'Page not found'));

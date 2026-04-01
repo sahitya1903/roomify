@@ -30,6 +30,7 @@
             </div>
         <% } %>
 
+        <% if(currUser){%>
         <div class="col-8 offset-3 mb-3">
             <br>
             <h4>Leave a Review</h4>
@@ -46,6 +47,7 @@
                 <br>
                 <button class="btn btn-outline-dark">Submit</button>
             </form>
+        <% } %>
 
             <hr>
 
@@ -54,7 +56,7 @@
             <% for(review of listing.reviews){ %>
                 <div class="card col-3 mb-3 ms-2">
                     <div class="card-body">
-                        <h5 class="card-title">Jane Doe</h5>
+                        <h5 class="card-title"><%= review.author.username %></h5>
                         <p class="card-text"><%= review.rating %> &starf;</p>
                         <p class="card-text"><%= review.comment %></p>
                     </div>

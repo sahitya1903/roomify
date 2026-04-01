@@ -9,7 +9,7 @@
             <img src="<%= listing.image %>" class="card-img-top show-img" alt="listing-image">
             <div class="card-body">
                 <!-- <h5 class="card-title"><b><%= listing.title %></b></h5> -->
-                <h6 class="card-text"></h6>
+                <h6 class="card-text">Owned by <i><%= listing.owner.username %></i></h6>
                 <p class="card-text">
                     <%= listing.description %> <br>
                     &#8377;<%= listing.price %>/night <br>

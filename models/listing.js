@@ -9,10 +9,8 @@ const listingSchema=new Schema({
     },
     description:String,
     image:{
-        type:String,
-        required:true,
-        default: "https://unsplash.com/photos/blue-body-of-water-in-front-of-building-near-trees-during-nighttime-M7GddPqJowg",
-        set: v=> v==="" ? "https://unsplash.com/photos/blue-body-of-water-in-front-of-building-near-trees-during-nighttime-M7GddPqJowg":v,
+        url: String,
+        filename: String,
     },
     price:Number,
     location:String,

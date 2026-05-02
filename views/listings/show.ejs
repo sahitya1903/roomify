@@ -1,4 +1,7 @@
 <% layout("/layouts/boilerplate") %>
+<script>
+    const mapToken= "<%=process.env.MAP_TOKEN%>";
+</script>
 <body>
     <div class="row mt-3">
         <div class="col-8 offset-3">
@@ -63,27 +66,35 @@
             </form>
         <% } %>
 
-            <hr>
-
-            <h4>All reviews</h4>
+        <hr>
+        <% if(listing.reviews.length>0){ %> 
             <div class="row">
-            <% for(review of listing.reviews){ %>
-                <div class="card col-3 mb-3 ms-2">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= review.author.username %></h5>
-                        <!-- <p class="card-text"><%= review.rating %> &starf;</p> -->
-                        <p class="starability-result card-text" data-rating="<%= review.rating %>">Rated: 3 stars</p>
-                        <p class="card-text"><%= review.comment %></p>
+                <h4>All reviews</h4>
+                    <% for(review of listing.reviews){ %>
+                    <div class="card col-3 mb-3 ms-2">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= review.author.username %></h5>
+                            <!-- <p class="card-text"><%= review.rating %> &starf;</p> -->
+                            <p class="starability-result card-text" data-rating="<%= review.rating %>">Rated: 3 stars</p>
+                            <p class="card-text"><%= review.comment %></p>
+                        </div>
+                        <form class="mb-3" method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" >
+                            <button class="btn btn-sm btn-dark">Delete</button>
+                        </form>
                     </div>
-                    <form class="mb-3" method="post" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" >
-                        <button class="btn btn-sm btn-dark">Delete</button>
-                    </form>
-                </div>
-            <% } %>
+                <% } %>
             </div>
+        <% } %>
+
+        <div class="col-8 offset-3 mb-3">
+            <h3>Where you'll be</h3>
+            <div id="map">
+
+            </div>
+        </div>
         </div>
     </div>
 
 </body>
 
-
+<script src="/js/map.js"></script>

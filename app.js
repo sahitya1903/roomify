@@ -74,10 +74,10 @@ app.use((req,res,next)=>{
 //     res.send(registeredUser);
 // })
 
-//Root
-app.get('/',(req,res)=>{
-    res.send('root');
-})
+// //Root
+// app.get('/',(req,res)=>{
+//     res.send('root');
+// })
 
 app.use('/listings',listingRouter); //listing routes
 app.use('/listings/:id/reviews',reviewRouter); //review routes

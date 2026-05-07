@@ -6,7 +6,13 @@ if(process.env.NODE_ENV != 'production'){
 const express=require('express');
 const app=express();
 const mongoose=require('mongoose');
-const mongourl="mongodb://127.0.0.1:27017/roomify";
+// const mongourl="mongodb://127.0.0.1:27017/roomify";
+
+const dbUrl=process.env.ATLASDB_URL;
+const dns=require('dns');
+dns.setServers(['1.1.1.1','8.8.8.8']);
+
+
 const path=require('path');
 const methodOverride=require('method-override');
 const ejsMate=require('ejs-mate');
@@ -27,7 +33,7 @@ main()
 .catch(err=>console.log(err));
 
 async function main() {
-    await mongoose.connect(mongourl);
+    await mongoose.connect(dbUrl);
 }
 
 app.set('view engine','ejs');

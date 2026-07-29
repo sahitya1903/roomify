@@ -6,7 +6,7 @@ if (process.env.NODE_ENV != 'production') {
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-// const mongourl="mongodb://127.0.0.1:27017/roomify";
+// const dbUrl="mongodb://127.0.0.1:27017/roomify";
 
 const dbUrl = process.env.ATLASDB_URL;
 const dns = require('dns');
